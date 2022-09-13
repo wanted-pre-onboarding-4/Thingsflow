@@ -48,7 +48,7 @@ const Container = styled.div<{ isDetail: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: ${props => (props.isDetail ? 'inherit' : 'pointer')};
 `;
 
 const InfoContainer = styled.div`

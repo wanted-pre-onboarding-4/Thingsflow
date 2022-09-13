@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { RootObject } from '../../../interfaces/interface';
 import AddBlock from './AdBlock';
+import { formatDate } from '../../../utils/format';
 
 const IssueCard = ({
   isDetail = false,
@@ -31,7 +32,7 @@ const IssueCard = ({
           </HeaderContainer>
           <FooterContainer>
             <AuthorName>작성자: {issue.user.login},</AuthorName>
-            <CreatedAt>작성일: {issue.created_at.slice(0, 10)}</CreatedAt>
+            <CreatedAt>작성일: {formatDate(issue.created_at)}</CreatedAt>
           </FooterContainer>
         </TitleContainer>
         <CommentContainer isDetail={isDetail}>코멘트: {issue.comments}</CommentContainer>

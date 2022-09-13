@@ -10,7 +10,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <Container>
       <Header organization={'Angular'} repository={'Angular-cli'}></Header>
-      {children}
+      <ChildrenWrapper>{children}</ChildrenWrapper>
     </Container>
   );
 };
@@ -22,4 +22,7 @@ const Container = styled.div`
   overflow: auto;
 `;
 
+const ChildrenWrapper = styled.div`
+  margin-top:50px;
+`;
 export default Layout;

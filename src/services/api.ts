@@ -9,8 +9,8 @@ export const issueApi = {
     axiosInstance.get(`/repos/${owner}/${repo}/issues`, {
       params,
     }),
-  getIssueDetail: (owner: string, repo: string, issueId: number) =>
-    axiosInstance.get(`/repos/${owner}/${repo}/issues/${issueId}`),
+  getIssueDetail: (owner: string, repo: string, issueNumber: string) =>
+    axiosInstance.get(`/repos/${owner}/${repo}/issues/${issueNumber}`),
 };
 
 axiosInstance.interceptors.request.use(config => {

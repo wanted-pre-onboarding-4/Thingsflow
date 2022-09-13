@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
 import { issueApi } from '../../services/api';
 import IssueCard from './components/IssueCard';
@@ -47,7 +48,7 @@ const IssueList = () => {
   return (
     <>
       {issues.map((issue: RootObject, idx: number) => (
-        <IssueCard key={issue.id} issue={issue} seq={idx + 1} />
+        <IssueCard isDetail={false} key={issue.id} issue={issue} seq={idx + 1} />
       ))}
       {!isLoading && <div ref={setTarget}></div>}
     </>

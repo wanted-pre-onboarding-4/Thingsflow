@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { issueApi } from '../../services/api';
 import IssueCard from './components/IssueCard';
 import { RootObject } from '../../interfaces/interface';
-import AddBlock from './components/AdBlock';
+// import AddBlock from './components/AdBlock';
 
 const IssueList = () => {
   const [issues, setIssues] = useState([]);
@@ -12,7 +12,7 @@ const IssueList = () => {
   const params = {
     sort: 'comments',
     page,
-    per_page: 5,
+    per_page: 20,
   };
 
   const loadMore = useCallback(async () => {
@@ -46,17 +46,9 @@ const IssueList = () => {
 
   return (
     <>
-      {issues.map((issue: RootObject, idx: number) => {
-        if (idx === 4) {
-          return (
-            <>
-              <AddBlock />
-              <IssueCard key={issue.id} issue={issue} />
-            </>
-          );
-        }
-        return <IssueCard key={issue.id} issue={issue} />;
-      })}
+      {issues.map((issue: RootObject, idx: number) => (
+        <IssueCard key={issue.id} issue={issue} seq={idx + 1} />
+      ))}
       {!isLoading && <div ref={setTarget}></div>}
     </>
   );

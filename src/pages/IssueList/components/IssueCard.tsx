@@ -2,14 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { RootObject } from '../../../interfaces/interface';
+import AddBlock from './AdBlock';
 
-const IssueCard = ({ issue }: { issue: RootObject }) => {
+const IssueCard = ({ issue, seq }: { issue: RootObject; seq: number }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
     navigate(`/detail/${issue.id}`);
   };
-  return (
+  return seq === 5 ? (
+    <AddBlock />
+  ) : (
     <Container onClick={handleCardClick}>
       <InfoContainer>
         <TitleContainer>

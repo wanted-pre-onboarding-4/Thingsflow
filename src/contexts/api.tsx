@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, useReducer, } from 'react';
+import React, { createContext, Dispatch, useReducer } from 'react';
 
 type State = {
   issueList: {
@@ -52,9 +52,7 @@ export function ApiProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ApiStateContext.Provider value={state}>
-      <ApiDispatchContext.Provider value={dispatch}>
-        {children}
-      </ApiDispatchContext.Provider>
+      <ApiDispatchContext.Provider value={dispatch}>{children}</ApiDispatchContext.Provider>
     </ApiStateContext.Provider>
-  )
-};
+  );
+}

@@ -23,6 +23,6 @@ const Container = styled.div`
 `;
 
 const ChildrenWrapper = styled.div`
-  margin-top:50px;
+  margin-top: 50px;
 `;
 export default Layout;

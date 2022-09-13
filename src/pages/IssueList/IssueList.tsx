@@ -3,49 +3,67 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { issueApi } from '../../services/api';
 import IssueCard from './components/IssueCard';
 import { RootObject } from '../../interfaces/interface';
-// import AddBlock from './components/AdBlock';
+import Loading from '../../components/Loading';
+
+const REQUEST_PARAMS = {
+  sort: 'comments',
+  page: 1,
+  per_page: 20,
+};
 
 const IssueList = () => {
-  const [issues, setIssues] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [target, setTarget] = useState<any>(null);
-  const [page, setPage] = useState(1);
-  const params = {
-    sort: 'comments',
-    page,
-    per_page: 20,
-  };
+  const [issues, setIssues] = useState<RootObject[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [initialLoading, setInitialLoading] = useState<boolean>(true);
+  const [target, setTarget] = useState<HTMLDivElement | null>(null);
+  const [isEnded, setIsEnded] = useState<boolean>(false);
 
-  const loadMore = useCallback(async () => {
+  const getIssueData = useCallback(async () => {
     setIsLoading(true);
-    const { data } = await issueApi.getAllIssue('angular', 'angular-cli', params);
-    setIssues(prev => prev.concat(data));
-    setIsLoading(false);
-    setPage(prev => prev + 1);
-  }, [page]);
 
-  useEffect(() => {
-    loadMore();
-  }, []);
+    const { data } = await issueApi.getAllIssue('angular', 'angular-cli', REQUEST_PARAMS);
+
+    if (data.length === 0) {
+      alert('더이상 불러올 데이터가 존재하지 않습니다.');
+      setIsEnded(true);
+      return;
+    }
+
+    setIssues(prev => prev.concat(data));
+    setInitialLoading(false);
+    setIsLoading(false);
+    REQUEST_PARAMS.page += 1;
+  }, [REQUEST_PARAMS.page]);
 
   // Observation
   useEffect(() => {
     let observer: IntersectionObserver;
-    if (target) {
-      const onIntersect = async ([entry]: any, observer: any) => {
-        if (entry.isIntersecting && issues.length >= params.per_page) {
-          observer.unobserve(entry.target);
-          await loadMore();
-          observer.observe(entry.target);
+
+    if (target && !isEnded) {
+      const onIntersect = async (
+        entry: IntersectionObserverEntry[],
+        observer: IntersectionObserver
+      ) => {
+        if (entry[0].isIntersecting) {
+          observer.unobserve(entry[0].target);
+          await getIssueData();
+          observer.observe(entry[0].target);
         }
       };
-      observer = new IntersectionObserver(onIntersect, { threshold: 0.7 });
+
+      observer = new IntersectionObserver(onIntersect, { threshold: 1 });
       observer.observe(target);
     }
     return () => observer && observer.disconnect();
   }, [target]);
 
-  return (
+  useEffect(() => {
+    getIssueData();
+  }, []);
+
+  return initialLoading ? (
+    <Loading />
+  ) : (
     <>
       {issues.map((issue: RootObject, idx: number) => (
         <IssueCard isDetail={false} key={issue.id} issue={issue} seq={idx + 1} />

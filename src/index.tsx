@@ -5,9 +5,7 @@ import { ApiProvider } from './contexts/api';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <React.StrictMode>
-    <ApiProvider>
-      <App />
-    </ApiProvider>
-  </React.StrictMode>
+  <ApiProvider>
+    <App />
+  </ApiProvider>
 );

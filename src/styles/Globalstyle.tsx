@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   #root {
-    width: 412px;
+    width: 375px;
     margin: 0 auto;
   }
 `;

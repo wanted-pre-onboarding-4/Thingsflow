@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import GlobalStyles from './styles/GlobalStyles';
 import Issue from './page/Issue/Issue';
 import IssueList from './page/IssueList/IssueList';
+import NotFound from './page/NotFound/NotFound';
 import theme from './styles/theme';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/issueList" element={<IssueList />} />
             <Route path="/issue/:id" element={<Issue />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

@@ -10,7 +10,7 @@ interface IssueItemProps {
   issueNumber: number;
   comments: number;
   title: string;
-  avatarUrl: string;
+  avatarUrl?: string;
 }
 
 export default function IssueCard({

@@ -1,16 +1,15 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header';
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = () => {
   return (
     <Container>
       <Header organization={'Angular'} repository={'Angular-cli'}></Header>
-      <ChildrenWrapper>{children}</ChildrenWrapper>
+      <ChildrenWrapper>
+        <Outlet />
+      </ChildrenWrapper>
     </Container>
   );
 };

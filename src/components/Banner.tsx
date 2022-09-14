@@ -1,11 +1,10 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const Banner = () => {
   return (
     <Container href="https://thingsflow.com/ko/home" target="_blank">
       <div>
-        <img src="/img/광고.png" />
+        <img src="/img/광고.png" alt="adImage" />
       </div>
     </Container>
   );

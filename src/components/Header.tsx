@@ -16,12 +16,12 @@ const Header = ({ organization, repository }: HeaderProps) => {
 
 const Container = styled.header`
   position: fixed;
-  top: 5px;
+  top: 0px;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 20px - 20px);
+  width: 100%;
   background-color: white;
-  height: 50px;
+  height: 60px;
   font-size: 1.5rem;
   font-weight: 600;
   display: flex;

@@ -12,7 +12,7 @@
 
 ## :link: 프로젝트 링크
 
-https://fourflix.netlify.app/
+https://angularissue.netlify.app
 
 ## :nut_and_bolt: 구현 기능
 

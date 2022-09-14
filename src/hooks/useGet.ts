@@ -17,7 +17,7 @@ const useGet: useGetFunc = (url: string, page = null, id = null) => {
   const dispatch = useApiDispatch();
 
   const queries = page ? `?state=open&sort=comments&per_page=4&page=${page}` : '';
-  const baseUrl = `https://api.github.com/repos/angular/angular-cli${id ? `/${id}` : ''}`;
+  const baseUrl = `https://api.github.com/repos/angular/angular-cli${url}${id ? `/${id}` : ''}`;
 
   const headers = {
     Authorization: `auth ${process.env.REACT_APP_API_TOKEN}`,
@@ -27,7 +27,7 @@ const useGet: useGetFunc = (url: string, page = null, id = null) => {
     page ? dispatch({ type: 'ISSUELIST', page }) : dispatch({ type: 'ISSUE', id: id! });
 
     try {
-      const result = await fetch(baseUrl + url + queries, { headers });
+      const result = await fetch(baseUrl + queries, { headers });
 
       if (!result.ok) {
         page

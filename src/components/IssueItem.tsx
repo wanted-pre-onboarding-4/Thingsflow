@@ -1,27 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import dateFormat from '../utils/dateFormat';
 
-const IssueItem = () => {
+interface IssueItemProps {
+  name: string;
+  created_at: string;
+  issueNumber: number;
+  comments: number;
+  title: string;
+}
+
+const IssueItem = ({ name, created_at, issueNumber, comments, title }: IssueItemProps) => {
+
   return (
     <Container>
-      <LinkWrapper to="/issue/12">
+      <LinkWrapper to={`/issue/${issueNumber}`}>
         <ContentWrapper>
           <div className="title">
-            <span>#111</span>
-            <h1>issue title</h1>
+            <span>#{issueNumber}</span>
+            <h1>{title}</h1>
           </div>
           <div className="info">
             <span>
-              작성자: <span>name</span>
+              작성자: <span>{name}</span>
             </span>
             ,
             <span>
-              작성일: <span>2019년 12월 31일</span>
+              작성일: <span>{dateFormat(created_at)}</span>
             </span>
           </div>
         </ContentWrapper>
-        <div className="coment">코멘트: 67</div>
+        <div className="coment">코멘트: {comments}</div>
       </LinkWrapper>
     </Container>
   );
@@ -31,11 +41,11 @@ const Container = styled.li`
   width: 100%;
   border-bottom: 1px solid black;
   padding: 20px 0;
+  list-style:none;
 `;
 const LinkWrapper = styled(Link)`
   display: grid;
-  grid-template-columns: 5fr 1fr;
-  /* justify-items:center; */
+  grid-template-columns: 4fr 1fr;
   align-items: center;
   @media (max-width: 440px) {
     .coment {
@@ -46,8 +56,10 @@ const LinkWrapper = styled(Link)`
 const ContentWrapper = styled.div`
   .title {
     font-size: 1.3rem;
-    margin-bottom: 10px;
-    display: flex;
+    font-weight:600;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns:1fr 5fr;
     span {
       margin-right: 5px;
     }
@@ -56,6 +68,9 @@ const ContentWrapper = styled.div`
     font-size: 1rem;
   }
   @media (max-width: 440px) {
+    .title{
+      font-size:1rem;
+    }
     .info {
       font-size: 0.8rem;
     }

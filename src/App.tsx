@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import Layout from './components/Layout';
 
 import GlobalStyles from './GlobalStyles';
 import Issue from './page/Issue/Issue';
@@ -13,9 +14,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Routes>
-          <Route path="/" element={<Navigate to="/issueList" />} />
-          <Route path="/issueList" element={<IssueList />} />
-          <Route path="/issue/:id" element={<Issue />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<Navigate to="/issueList" />} />
+            <Route path="/issueList" element={<IssueList />} />
+            <Route path="/issue/:id" element={<Issue />} />
+          </Route>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

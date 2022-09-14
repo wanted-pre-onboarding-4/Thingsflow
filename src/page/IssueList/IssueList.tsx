@@ -1,8 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { IssueDataInterface, useApiState } from '../../contexts/api';
 import Banner from '../../components/Banner';
-import Layout from '../../components/Layout';
-// import IssueItem from '../../components/IssueItem';
 import useGet from '../../hooks/useGet';
 import styled from 'styled-components';
 import Loading from '../../components/Loading';
@@ -35,23 +33,21 @@ const IssueList = () => {
   }, [handleObserver]);
 
   return (
-    <Layout>
-      <ul>
-        {data?.map((data: any, index: number) => (
-          <Fragment key={data.number}>
-            <IssueCard
-              name={data.user.login}
-              created_at={data.created_at}
-              issueNumber={data.number}
-              comments={data.comments}
-              title={data.title}
-            />
-            {index === 3 && <>{loading ? '' : <Banner />}</>}
-          </Fragment>
-        ))}
-        {loading ? <Loading /> : <ObserverBox ref={observerBox}></ObserverBox>}
-      </ul>
-    </Layout>
+    <ul>
+      {data?.map((data: any, index: number) => (
+        <Fragment key={data.number}>
+          <IssueCard
+            name={data.user.login}
+            created_at={data.created_at}
+            issueNumber={data.number}
+            comments={data.comments}
+            title={data.title}
+          />
+          {index === 3 && <>{loading ? '' : <Banner />}</>}
+        </Fragment>
+      ))}
+      {loading ? <Loading /> : <ObserverBox ref={observerBox}></ObserverBox>}
+    </ul>
   );
 };
 

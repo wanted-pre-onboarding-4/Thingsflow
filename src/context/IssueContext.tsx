@@ -18,7 +18,7 @@ export default function IssueProvider({ children }: { children: any }) {
 
   const getList = () => {
     issueApi
-      .getIssueList({ sort: 'comments', status: 'open', per_page: 10, page })
+      .getIssueList({ sort: 'comments', status: 'open', per_page: 15, page })
       .then(res => {
         return setIssues([...issues, ...res.data]);
       })
@@ -26,6 +26,7 @@ export default function IssueProvider({ children }: { children: any }) {
   };
 
   useEffect(() => {
+    console.log(page);
     getList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);

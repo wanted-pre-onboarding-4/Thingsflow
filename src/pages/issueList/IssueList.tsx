@@ -38,9 +38,11 @@ export default function IssueList() {
             <Link to={`/issues/${issue.number}`} state={{ ...issue }}>
               <IssueCard issue={issue} />
             </Link>
-            <AdCard onClick={onClickAd} className={index === 3 ? 'isDisplay' : ''}>
-              <img alt="adImage" src="/thinksflow-logo.png" />
-            </AdCard>
+            {index === 3 && (
+              <AdCard onClick={onClickAd}>
+                <img alt="adImage" src="/thinksflow-logo.png" />
+              </AdCard>
+            )}
           </Fragment>
         ))}
       </Wrap>
@@ -53,21 +55,18 @@ export default function IssueList() {
 
 const Wrap = styled.div`
   margin-bottom: 50px;
-  .isDisplay {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 0px;
-    border-bottom: 1px solid black;
-    cursor: pointer;
-    img {
-      width: 100px;
-    }
-  }
 `;
 
 const AdCard = styled.div`
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0px;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+  img {
+    width: 100px;
+  }
 `;
 
 const LoadMore = styled.div`

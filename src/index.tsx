@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { ThemeProvider } from 'styled-components';
@@ -7,11 +6,9 @@ import IssueProvider from './context/IssueContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <React.StrictMode>
-    <IssueProvider>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </IssueProvider>
-  </React.StrictMode>
+  <IssueProvider>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </IssueProvider>
 );

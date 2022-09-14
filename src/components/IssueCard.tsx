@@ -3,25 +3,22 @@ import { MdOutlineComment } from 'react-icons/md';
 import { IIssue } from '../utils/types';
 import { getMyDate } from '../utils/GetDate';
 
-interface IIssueCardProps {
-  issue: IIssue;
-}
-export default function IssueCard(props: IIssueCardProps) {
+export default function IssueCard({ issue }: { issue: IIssue }) {
   return (
     <Card>
       <CardLeft>
         <CardHead>
-          <Number>#{props.issue.number}</Number>
-          <Title>{props.issue.title}</Title>
+          <Number>#{issue.number}</Number>
+          <Title>{issue.title}</Title>
         </CardHead>
         <CardSub>
-          <User>작성자 : {props.issue.user.login},</User>
-          <Date>작성일 : {getMyDate(props.issue.created_at)}</Date>
+          <User>작성자 : {issue.user.login},</User>
+          <Date>작성일 : {getMyDate(issue.created_at)}</Date>
         </CardSub>
       </CardLeft>
       <CardRight>
         <MdOutlineComment />
-        <Comment>{props.issue.comments}</Comment>
+        <Comment>{issue.comments}</Comment>
       </CardRight>
     </Card>
   );

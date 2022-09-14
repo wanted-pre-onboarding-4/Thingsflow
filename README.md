@@ -1,5 +1,6 @@
 # Assginment #4
 
+<<<<<<< HEAD
 ## 🎯 프로젝트 목표
 
 #### 띵스플로우 과제
@@ -92,6 +93,17 @@ https://fourflix.netlify.app/
 
 
 ## 🖥 Getting Started
+
+## installed dependencies
+
+- react-router-dom
+- axios
+- styled-components
+- eslint
+- prettier
+- husky
+
+## Usage
 
 1. `Clone` the repository
 

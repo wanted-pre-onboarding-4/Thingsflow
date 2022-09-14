@@ -21,25 +21,32 @@ const IssueList = () => {
   const getIssueData = useCallback(async () => {
     setIsLoading(true);
 
-    const { data } = await issueApi.getAllIssue('angular', 'angular-cli', REQUEST_PARAMS);
+    try {
+      const { data } = await issueApi.getAllIssue('angular', 'angular-cli', REQUEST_PARAMS);
 
-    if (data.length === 0) {
-      alert('더이상 불러올 데이터가 존재하지 않습니다.');
-      setIsEnded(true);
-      return;
+      if (data.length === 0) {
+        alert('더이상 불러올 데이터가 존재하지 않습니다.');
+        setIsEnded(true);
+        setInitialLoading(false);
+        return;
+      }
+
+      setIssues(prev => prev.concat(data));
+      REQUEST_PARAMS.page += 1;
+    } catch (e: unknown) {
+      console.warn(e);
+    } finally {
+      setInitialLoading(false);
+      setIsLoading(false);
     }
-
-    setIssues(prev => prev.concat(data));
-    setInitialLoading(false);
-    setIsLoading(false);
-    REQUEST_PARAMS.page += 1;
   }, [REQUEST_PARAMS.page]);
 
   // Observation
   useEffect(() => {
     let observer: IntersectionObserver;
+    if (isEnded) return;
 
-    if (target && !isEnded) {
+    if (target) {
       const onIntersect = async (
         entry: IntersectionObserverEntry[],
         observer: IntersectionObserver
@@ -58,6 +65,7 @@ const IssueList = () => {
   }, [target]);
 
   useEffect(() => {
+    console.log(issues);
     getIssueData();
   }, []);
 

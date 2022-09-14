@@ -1,11 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Header = () => {
-  const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/');
+    window.location.href = '/';
   };
   return (
     <Container onClick={handleClick}>

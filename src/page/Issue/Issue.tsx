@@ -1,10 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Layout from '../../components/Layout';
+import IssueCard from '../../components/IssueCard';
 import Loading from '../../components/Loading';
-import { IssueDataInterface } from '../../contexts/api';
 import useGet from '../../hooks/useGet';
-import IssueHeader from './components/Header';
+import { IssueDataInterface } from '../../types/type';
 import MarkDown from './components/Markdown';
 
 const Issue = () => {
@@ -16,12 +15,13 @@ const Issue = () => {
   );
 
   return (
-    <Layout>
+    <>
       {loading || !data ? (
         <Loading />
       ) : (
         <>
-          <IssueHeader
+          <IssueCard
+            isDetail={true}
             avatarUrl={data.user.avatar_url}
             name={data.user.login}
             created_at={data.created_at}
@@ -32,7 +32,7 @@ const Issue = () => {
           <MarkDown content={data.body} />
         </>
       )}
-    </Layout>
+    </>
   );
 };
 

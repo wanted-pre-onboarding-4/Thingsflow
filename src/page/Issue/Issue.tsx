@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Loading from '../../components/Loading';
-import { IssueDataInterface } from '../../contexts/api';
 import useGet from '../../hooks/useGet';
+import { IssueDataInterface } from '../../types/type';
 import IssueHeader from './components/Header';
 import MarkDown from './components/Markdown';
 

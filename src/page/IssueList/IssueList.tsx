@@ -1,10 +1,11 @@
 import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react';
-import { IssueDataInterface, useApiState } from '../../contexts/api';
+import { useApiState } from '../../contexts/api';
 import Banner from '../../components/Banner';
 import useGet from '../../hooks/useGet';
 import styled from 'styled-components';
 import Loading from '../../components/Loading';
 import IssueCard from '../../components/IssueCard';
+import { IssueDataInterface } from '../../types/type';
 
 const IssueList = () => {
   const { issueList } = useApiState();

@@ -1,17 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Loading = () => {
   return (
     <LoadingWrapper>
-      <LoadingDotWrapper>
-        <div></div>
-        <div></div>
-        <div></div>
-      </LoadingDotWrapper>
+      <LoadingDotWrapper />
     </LoadingWrapper>
   );
 };
+
+const split = keyframes`
+ 0% , 25%{ width: 64px }
+ 100%{ width: 148px }
+`;
 
 const LoadingWrapper = styled.div`
   width: 100%;
@@ -23,60 +24,31 @@ const LoadingWrapper = styled.div`
 `;
 
 const LoadingDotWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 30%;
-  margin-bottom: 20px;
-  div {
-    width: 10px;
-    height: 10px;
-    background-color: black;
+  width: 64px;
+  height: 48px;
+  position: relative;
+  animation: ${split} 1s ease-in infinite alternate;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
+    left: 0;
+    top: 0;
+    transform: translateX(-10px);
+    background: #ff3d00;
+    opacity: 0.75;
+    backdrop-filter: blur(20px);
   }
 
-  div:nth-child(1) {
-    animation: FirstDotScale 3s linear infinite;
-  }
-
-  #loading_dotWrapper div:nth-child(2) {
-    animation: SecondDotScale 3s linear infinite;
-  }
-
-  #loading_dotWrapper div:nth-child(3) {
-    animation: ThirdDotScale 3s linear infinite;
-  }
-
-  @keyframes FirstDotScale {
-    0% {
-      transform: scale(1.5);
-    }
-    15% {
-    }
-    30% {
-      transform: scale(1);
-    }
-  }
-
-  @keyframes SecondDotScale {
-    30% {
-      transform: scale(1.5);
-    }
-    45% {
-    }
-    60% {
-      transform: scale(1);
-    }
-  }
-
-  @keyframes ThirdDotScale {
-    60% {
-      transform: scale(1.5);
-    }
-    75% {
-    }
-    90% {
-      transform: scale(1);
-    }
+  &::after {
+    left: auto;
+    right: 0;
+    background: skyblue;
+    transform: translateX(10px);
   }
 `;
 

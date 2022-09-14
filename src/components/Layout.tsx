@@ -1,14 +1,15 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { OWNER, REPOSITORY } from '../services/IssueServices';
+import { Link } from 'react-router-dom';
 
 export default function Layout() {
   return (
     <Wrap>
       <Header>
-        <span>
+        <Link to="/">
           {OWNER} / {REPOSITORY}
-        </span>
+        </Link>
       </Header>
       <Outlet />
     </Wrap>

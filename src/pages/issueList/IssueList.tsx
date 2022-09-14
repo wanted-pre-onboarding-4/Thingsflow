@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Fragment, useEffect, useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { IIssue } from '../../utils/types';
 import { Link } from 'react-router-dom';
 import IssueCard from '../../components/IssueCard';
@@ -7,16 +7,11 @@ import { useIssues } from '../../context/IssueContext';
 
 export default function IssueList() {
   const targetRef = useRef<HTMLDivElement>(null);
-  const { issues, getList, page, setPage } = useIssues();
+  const { issues, setPage } = useIssues();
 
   const onClickAd = () => {
     window.location.href = 'https://thingsflow.com/ko/home';
   };
-
-  useEffect(() => {
-    getList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
 
   const loadMore = () => {
     setPage((prev: number) => prev + 1);

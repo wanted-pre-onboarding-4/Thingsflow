@@ -1,11 +1,8 @@
-const size = {
-  mobile: 'px',
-  desktop: 'px',
-};
-
 const theme = {
-  mobile: `(max-width:${size.mobile})`,
-  desktop: `(max-width:${size.desktop})`,
+  breakPoints: {
+    pc: '(min-width: 768px) and (max-width: 1023px)',
+    mobile: '(max-width: 767px)',
+  },
 };
 
 export default theme;

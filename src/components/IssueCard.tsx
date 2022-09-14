@@ -4,31 +4,36 @@ import dateFormat from '../utils/dateFormat';
 import { Link } from 'react-router-dom';
 
 interface IssueItemProps {
+  isDetail: boolean;
   name: string;
   created_at: string;
   issueNumber: number;
   comments: number;
   title: string;
+  avatarUrl: string;
 }
 
 export default function IssueCard({
+  isDetail,
   name,
   created_at,
   issueNumber,
   comments,
   title,
+  avatarUrl,
 }: IssueItemProps) {
   return (
     <Card to={`/issue/${issueNumber}`}>
       <CardLeft>
         <CardHead>
-          <Number>#{issueNumber}</Number>
+          <AvatarContainer>
+            {isDetail && <AvatarImage src={avatarUrl} alt="userAvatar" />}
+            <Number>#{issueNumber}</Number>
+          </AvatarContainer>
           <Title>{title}</Title>
-        </CardHead>
-        <CardSub>
-          <User>작성자 : {name},</User>
+          <User>작성자 : {name}</User>
           <Date>작성일 : {dateFormat(created_at)}</Date>
-        </CardSub>
+        </CardHead>
       </CardLeft>
       <CardRight>
         <MdOutlineComment />
@@ -62,22 +67,32 @@ const CardHead = styled.div`
     font-size: 1rem;
     margin-bottom: 10px;
   }
+  display: flex;
+  flex-direction: column;
 `;
 
-const Number = styled.span`
-  margin-right: 5px;
+const AvatarContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
-const Title = styled.span``;
+const AvatarImage = styled.img`
+  width: 30px;
+  height: 30px;
+  display: inline;
+`;
 
-const CardSub = styled.div`
-  @media ${({ theme }) => theme.breakPoints.mobile} {
-    font-size: 0.8rem;
-  }
+const Number = styled.div`
+  margin: 5px;
+`;
+
+const Title = styled.span`
+  margin-top: 5px;
 `;
 
 const User = styled.span`
   margin-right: 8px;
+  margin-top: 5px;
   @media ${({ theme }) => theme.breakPoints.mobile} {
     margin-right: 5px;
   }

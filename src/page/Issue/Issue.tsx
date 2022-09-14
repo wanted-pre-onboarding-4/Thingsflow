@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import IssueCard from '../../components/IssueCard';
 import Layout from '../../components/Layout';
 import Loading from '../../components/Loading';
 import { IssueDataInterface } from '../../contexts/api';
 import useGet from '../../hooks/useGet';
-import IssueHeader from './components/Header';
 import MarkDown from './components/Markdown';
 
 const Issue = () => {
@@ -21,7 +21,8 @@ const Issue = () => {
         <Loading />
       ) : (
         <>
-          <IssueHeader
+          <IssueCard
+            isDetail={true}
             avatarUrl={data.user.avatar_url}
             name={data.user.login}
             created_at={data.created_at}

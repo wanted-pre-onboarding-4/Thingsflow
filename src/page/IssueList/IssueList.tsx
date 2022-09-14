@@ -40,6 +40,7 @@ const IssueList = () => {
       {data?.map((data: any, index: number) => (
         <Fragment key={data.number}>
           <IssueCard
+            isDetail={false}
             name={data.user.login}
             created_at={data.created_at}
             issueNumber={data.number}

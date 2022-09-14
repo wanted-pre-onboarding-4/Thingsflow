@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Layout from './components/Layout';
 
-import GlobalStyles from './GlobalStyles';
+import GlobalStyles from './styles/GlobalStyles';
 import Issue from './page/Issue/Issue';
 import IssueList from './page/IssueList/IssueList';
 import theme from './styles/theme';

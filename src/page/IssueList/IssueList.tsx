@@ -1,21 +1,25 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { IssueDataInterface, useApiState } from "../../contexts/api";
 import Banner from '../../components/Banner';
 import Layout from '../../components/Layout';
 import IssueItem from '../../components/IssueItem';
 import useGet from '../../hooks/useGet';
 import styled from 'styled-components';
+import Loading from '../../components/Loading';
 
 const IssueList = () => {
-  const [page, setPage] = useState(1);
-  const { data, loading, error } = useGet('/issues', page, null);
+  const { issueList } = useApiState();
+  const [page, setPage] = useState(issueList.data.length ? issueList.data.length / 4 : 1);
+  const { data, loading } = useGet<IssueDataInterface[]>('/issues', page, null);
   const observerBox = useRef(null);
-  console.log(data); // user.loing  number, created_at comments
+
+
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
     if (target.isIntersecting) {
       setPage(prev => prev + 1);
     }
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
     const option = {
@@ -30,14 +34,14 @@ const IssueList = () => {
   return (
     <Layout>
       <ul>
-        {data.slice(0, 4).map((data: any) => (
-          <IssueItem name={data.user.login} created_at={data.created_at} issueNumber={data.number} comments={data.comments} title={data.title} />
+        {data?.slice(0, 4).map((data: any) => (
+          <IssueItem key={data.number} name={data.user.login} created_at={data.created_at} issueNumber={data.number} comments={data.comments} title={data.title} />
         ))}
-        <Banner />
-        {data.slice(4).map((data: any) => (
-          <IssueItem name={data.user.login} created_at={data.created_at} issueNumber={data.number} comments={data.comments} title={data.title} />
+        {loading ? "" : <Banner />}
+        {data?.slice(4).map((data: any) => (
+          <IssueItem key={data.number} name={data.user.login} created_at={data.created_at} issueNumber={data.number} comments={data.comments} title={data.title} />
         ))}
-        <ObserverBox ref={observerBox}></ObserverBox>
+        {loading ? <Loading /> : <ObserverBox ref={observerBox}></ObserverBox>}
       </ul>
     </Layout>
   );
@@ -45,7 +49,6 @@ const IssueList = () => {
 
 const ObserverBox = styled.div`
   width: 100%;
-  background-color: green;
   height: 50px;
 `;
 

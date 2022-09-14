@@ -1,10 +1,17 @@
 import { useEffect } from 'react';
 import { useApiDispatch, useApiState } from '../contexts/api';
 
-type returnData = { data: any; loading: boolean; error: string | null };
-type useGetFunc = (url: string, page: number | null, id: number | null) => returnData;
+interface returnData<T> {
+  data: T | any;
+  loading: boolean;
+  error: string | null;
+}
 
-const useGet: useGetFunc = (url: string, page = null, id = null) => {
+const useGet = <T = any>(
+  url: string,
+  page: number | null = null,
+  id: number | null = null
+): returnData<T> => {
   if (!page && !id) {
     throw new Error('인자 page, id 둘 중 하나는 있어야 합니다.');
   }
@@ -56,6 +63,7 @@ const useGet: useGetFunc = (url: string, page = null, id = null) => {
   };
 
   useEffect(() => {
+    if (!id && page !== state.issueList.data.length / 4 + 1) return;
     getDatas();
   }, [page, id]);
 

@@ -1,13 +1,25 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 
+export interface IssueDataInterface {
+  title: string;
+  body: string;
+  number: number;
+  created_at: string;
+  user: {
+    login: string;
+    avatar_url: string;
+  };
+  [key: string]: any;
+}
+
 type State = {
   issueList: {
-    data: any[];
+    data: IssueDataInterface[] | [];
     loading: boolean;
     error: string | null;
   };
   issue: {
-    data: any;
+    data: IssueDataInterface | null;
     loading: boolean;
     error: string | null;
   };
@@ -16,10 +28,10 @@ type State = {
 type Action =
   | { type: 'ISSUELIST'; page: number }
   | { type: 'ISSUELIST_FAIL'; error: string }
-  | { type: 'ISSUELIST_SUCCESS'; data: any[] }
+  | { type: 'ISSUELIST_SUCCESS'; data: IssueDataInterface[] }
   | { type: 'ISSUE'; id: number }
   | { type: 'ISSUE_FAIL'; error: string }
-  | { type: 'ISSUE_SUCCESS'; data: any };
+  | { type: 'ISSUE_SUCCESS'; data: IssueDataInterface };
 
 type ApiDispatch = Dispatch<Action>;
 

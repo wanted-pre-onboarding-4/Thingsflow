@@ -30,6 +30,8 @@ const IssueList = () => {
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (observerBox.current) observer.observe(observerBox.current);
+
+    return () => observer && observer.disconnect();
   }, [handleObserver]);
 
   return (

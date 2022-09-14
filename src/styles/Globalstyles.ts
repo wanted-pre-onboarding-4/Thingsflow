@@ -17,7 +17,6 @@ const GlobalStyle = createGlobalStyle`
     max-width: 768px;
     width: 100%;
     margin: 0 auto;
-    border:1px solid red;
   }
 `;
 

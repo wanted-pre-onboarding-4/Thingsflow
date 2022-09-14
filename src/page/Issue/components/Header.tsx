@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import IssueItem from '../../../components/IssueItem';
+import IssueCard from '../../../components/IssueCard';
 
 interface IssueHeaderProps {
   name: string;
@@ -22,9 +22,9 @@ const IssueHeader = ({
   return (
     <Container>
       <ImageWrapper>
-        <img src={avatarUrl} />
+        <img src={avatarUrl} alt="userAvatar" />
       </ImageWrapper>
-      <IssueItem
+      <IssueCard
         name={name}
         created_at={created_at}
         issueNumber={issueNumber}
@@ -38,6 +38,7 @@ const IssueHeader = ({
 const Container = styled.div`
   display: flex;
   margin-bottom: 30px;
+  align-items: center;
 `;
 
 const ImageWrapper = styled.div`

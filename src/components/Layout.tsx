@@ -16,13 +16,20 @@ const Layout = ({ children }: LayoutProps) => {
 };
 
 const Container = styled.div`
-  border: 5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0 20px;
-  height: calc(100vh - 10px);
   overflow: auto;
 `;
 
 const ChildrenWrapper = styled.div`
-  margin-top: 50px;
+  width: 100%;
+  margin: 50px 0px;
+  max-width: 1200px;
+  @media ${({ theme }) => theme.breakPoints.mobile} {
+    min-width: 300px;
+    padding: 10px 8px;
+  }
 `;
 export default Layout;

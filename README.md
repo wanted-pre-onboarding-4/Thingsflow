@@ -1,6 +1,7 @@
 # Typescript Template
 
 ## installed dependencies
+
 - react-router-dom
 - axios
 - styled-components
@@ -9,6 +10,7 @@
 - husky
 
 ## Usage
+
 1. `Clone` the repository
    ```markdown
    $ git clone https://github.com/wanted-pre-onboarding-4/template.git

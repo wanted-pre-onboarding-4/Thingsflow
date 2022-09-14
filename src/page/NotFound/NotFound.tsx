@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from '../../components/Header';
+
 const NotFound = () => {
   const navigate = useNavigate();
   const isGoToPrev = () => {
@@ -9,7 +9,6 @@ const NotFound = () => {
   };
   return (
     <Wrap>
-      <Header organization={'Angular'} repository={'Angular-cli'}></Header>
       <ChildrenWrapper>
         <ImageSection>
           <Image src="/img/notFound.png" alt="notFoundImage" />

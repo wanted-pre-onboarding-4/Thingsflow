@@ -9,14 +9,12 @@ interface IssueMainProps {
 const IssueMain = ({ body, attp }: IssueMainProps) => {
   return (
     <Container>
-      <p>
-        {body}
-      </p>
+      <p>{body}</p>
       <div>
         ATTN:
-        {
-          attp.map(person => <span>@${person} /</span>)
-        }
+        {attp.map(person => (
+          <span>@${person} /</span>
+        ))}
       </div>
     </Container>
   );

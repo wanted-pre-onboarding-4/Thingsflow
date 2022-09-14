@@ -12,7 +12,6 @@ interface IssueItemProps {
 }
 
 const IssueItem = ({ name, created_at, issueNumber, comments, title }: IssueItemProps) => {
-
   return (
     <Container>
       <LinkWrapper to={`/issue/${issueNumber}`}>
@@ -41,7 +40,7 @@ const Container = styled.li`
   width: 100%;
   border-bottom: 1px solid black;
   padding: 20px 0;
-  list-style:none;
+  list-style: none;
 `;
 const LinkWrapper = styled(Link)`
   display: grid;
@@ -56,10 +55,10 @@ const LinkWrapper = styled(Link)`
 const ContentWrapper = styled.div`
   .title {
     font-size: 1.3rem;
-    font-weight:600;
+    font-weight: 600;
     margin-bottom: 20px;
     display: grid;
-    grid-template-columns:1fr 5fr;
+    grid-template-columns: 1fr 5fr;
     span {
       margin-right: 5px;
     }
@@ -68,8 +67,8 @@ const ContentWrapper = styled.div`
     font-size: 1rem;
   }
   @media (max-width: 440px) {
-    .title{
-      font-size:1rem;
+    .title {
+      font-size: 1rem;
     }
     .info {
       font-size: 0.8rem;

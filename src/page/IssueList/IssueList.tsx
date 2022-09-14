@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { IssueDataInterface, useApiState } from "../../contexts/api";
+import { IssueDataInterface, useApiState } from '../../contexts/api';
 import Banner from '../../components/Banner';
 import Layout from '../../components/Layout';
 import IssueItem from '../../components/IssueItem';
@@ -13,13 +13,15 @@ const IssueList = () => {
   const { data, loading } = useGet<IssueDataInterface[]>('/issues', page, null);
   const observerBox = useRef(null);
 
-
-  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
-    const target = entries[0];
-    if (target.isIntersecting) {
-      setPage(prev => prev + 1);
-    }
-  }, [loading]);
+  const handleObserver = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const target = entries[0];
+      if (target.isIntersecting) {
+        setPage(prev => prev + 1);
+      }
+    },
+    [loading]
+  );
 
   useEffect(() => {
     const option = {
@@ -35,11 +37,25 @@ const IssueList = () => {
     <Layout>
       <ul>
         {data?.slice(0, 4).map((data: any) => (
-          <IssueItem key={data.number} name={data.user.login} created_at={data.created_at} issueNumber={data.number} comments={data.comments} title={data.title} />
+          <IssueItem
+            key={data.number}
+            name={data.user.login}
+            created_at={data.created_at}
+            issueNumber={data.number}
+            comments={data.comments}
+            title={data.title}
+          />
         ))}
-        {loading ? "" : <Banner />}
+        {loading ? '' : <Banner />}
         {data?.slice(4).map((data: any) => (
-          <IssueItem key={data.number} name={data.user.login} created_at={data.created_at} issueNumber={data.number} comments={data.comments} title={data.title} />
+          <IssueItem
+            key={data.number}
+            name={data.user.login}
+            created_at={data.created_at}
+            issueNumber={data.number}
+            comments={data.comments}
+            title={data.title}
+          />
         ))}
         {loading ? <Loading /> : <ObserverBox ref={observerBox}></ObserverBox>}
       </ul>

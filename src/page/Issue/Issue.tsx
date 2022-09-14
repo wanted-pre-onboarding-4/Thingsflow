@@ -10,19 +10,30 @@ import Motivation from './components/Motivation';
 
 const Issue = () => {
   const { pathname } = useLocation();
-  const { data, loading } = useGet<IssueDataInterface>("/issues", null, +pathname.split("/issue/")[1]);
+  const { data, loading } = useGet<IssueDataInterface>(
+    '/issues',
+    null,
+    +pathname.split('/issue/')[1]
+  );
 
   return (
     <Layout>
-      {loading || !data ?
+      {loading || !data ? (
         <Loading />
-        :
+      ) : (
         <div>
-          <IssueHeader avatarUrl={data.user.avatar_url} name={data.user.login} created_at={data.created_at} issueNumber={data.number} comments={data.comments} title={data.title} />
+          <IssueHeader
+            avatarUrl={data.user.avatar_url}
+            name={data.user.login}
+            created_at={data.created_at}
+            issueNumber={data.number}
+            comments={data.comments}
+            title={data.title}
+          />
           <IssueMain body={data.body} attp={data.labels.map((label: any) => label.name)} />
           <Motivation />
         </div>
-      }
+      )}
     </Layout>
   );
 };
